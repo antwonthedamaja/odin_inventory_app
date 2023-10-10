@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
-    name: { type: String, unique: true, required: true },
+    name: { type: String, required: true },
     description: { type: String, required: true },
+    condition: { type: String, enum: ["New", "Used"], required: true },
     stock: { type: Number, min: 0, required: true },
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
     price: { type: Number, min: 0, required: true }

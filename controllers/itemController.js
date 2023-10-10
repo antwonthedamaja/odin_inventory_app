@@ -3,6 +3,7 @@ const Category = require("../models/category");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
+const mongoose = require('mongoose')
 
 // GET
 exports.item_index = asyncHandler(async (req, res, next) => {
@@ -32,9 +33,30 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 })
 
 // POST
-exports.item_create_post = asyncHandler(async (req, res, next) => {
-    
-})
+exports.item_create_post = [
+    body('name').trim().notEmpty().escape(),
+    body('description').trim().notEmpty().escape(),
+    body('condition').trim().isIn('New', 'Used').escape(),
+    body('stock').trim().notEmpty().isInt({ min: 0 }),
+    body('category').trim().notEmpty().escape(),
+    body('price').trim().notEmpty().isInt({ min: 0 }),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        if (errors.isEmpty() && mongoose.isValidObjectId(req.body.category)) {
+            const item = new Item({
+                name: req.body.name,
+                description: req.body.description,
+                condition: req.body.condition,
+                stock: req.body.stock,
+                category: req.body.category,
+                price: req.body.price
+            })
+            await item.save();
+            res.redirect(item.url);
+        }
+    })
+]
 
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
     
