@@ -62,9 +62,10 @@ exports.item_create_post = [
     })
 ]
 
-exports.item_delete_post = [
-    
-]
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+    await Item.findByIdAndDelete(req.params.id).exec();
+    res.redirect("/items");
+})
 
 exports.item_update_post = [
     body('name').trim().notEmpty().escape(),
@@ -81,7 +82,7 @@ exports.item_update_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
         if (errors.isEmpty()) {
-            await Item.findByIdAndUpdate(req.params.id, {
+            const item = await Item.findByIdAndUpdate(req.params.id, {
                 name: req.body.name,
                 description: req.body.description,
                 condition: req.body.condition,
@@ -89,7 +90,6 @@ exports.item_update_post = [
                 category: req.body.category,
                 price: req.body.price
             }).exec();
-            const item = await Item.findById(req.params.id, "url").exec();
             res.redirect(item.url);
         }
     })
