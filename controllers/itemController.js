@@ -37,13 +37,22 @@ exports.item_create_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
     body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
-    body('stock').trim().notEmpty().isInt({ min: 0 }.optional()),
+    body('stock').trim().notEmpty().escape().custom(value => {
+        if (typeof parseInt(value) === Number && parseInt(value) < 0) {
+            throw new Error('Stock must be greater than 0')
+        } else if (typeof value === String && value != "Digital store key") {
+            throw new Error('Value is not valid')
+        }
+        return true;
+    }),
     body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
             throw new Error("Genre value is not a valid ObjectID");
         }
+        return true;
     }),
     body('developer').trim().notEmpty().escape(),
+    body('platform').trim().notEmpty().escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -54,7 +63,8 @@ exports.item_create_post = [
                 condition: req.body.condition,
                 stock: req.body.stock,
                 genre: req.body.genre,
-                developer: req.body.developer
+                developer: req.body.developer,
+                platform: req.body.platform
             })
             await item.save();
             res.redirect(item.url);
@@ -71,13 +81,22 @@ exports.item_update_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
     body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
-    body('stock').trim().notEmpty().isInt({ min: 0 }).optional(),
+    body('stock').trim().notEmpty().escape().custom(value => {
+        if (typeof parseInt(value) === Number && parseInt(value) < 0) {
+            throw new Error('Stock must be greater than 0')
+        } else if (typeof value === String && value != "Digital store key") {
+            throw new Error('Value is not valid')
+        }
+        return true;
+    }),
     body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
             throw new Error("Genre value is not a valid ObjectID");
         }
+        return true;
     }),
     body('developer').trim().notEmpty().escape(),
+    body('platform').trim().notEmpty().escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -88,7 +107,8 @@ exports.item_update_post = [
                 condition: req.body.condition,
                 stock: req.body.stock,
                 genre: req.body.genre,
-                developer: req.body.developer
+                developer: req.body.developer,
+                platform: req.body.platform
             }).exec();
             res.redirect(item.url);
         }
