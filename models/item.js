@@ -8,7 +8,8 @@ const itemSchema = new Schema({
     stock: { type: Schema.Types.Mixed, required: true },
     genre: { type: Schema.Types.ObjectId, ref: 'Genre', required: true },
     developer: { type: String, required: true },
-    platform: { type: String, required: true }
+    platform: { type: String, required: true },
+    released: { type: Number, required: true }
 });
 
 itemSchema.virtual('url').get(function() {

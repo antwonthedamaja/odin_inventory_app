@@ -53,6 +53,7 @@ exports.item_create_post = [
     }),
     body('developer').trim().notEmpty().escape(),
     body('platform').trim().notEmpty().escape(),
+    body('released').trim().notEmpty().isLength(4).isNumeric(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -64,7 +65,8 @@ exports.item_create_post = [
                 stock: req.body.stock,
                 genre: req.body.genre,
                 developer: req.body.developer,
-                platform: req.body.platform
+                platform: req.body.platform,
+                released: req.body.released
             })
             await item.save();
             res.redirect(item.url);
@@ -97,6 +99,7 @@ exports.item_update_post = [
     }),
     body('developer').trim().notEmpty().escape(),
     body('platform').trim().notEmpty().escape(),
+    body('released').trim().notEmpty().isLength(4).isNumeric(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -108,7 +111,8 @@ exports.item_update_post = [
                 stock: req.body.stock,
                 genre: req.body.genre,
                 developer: req.body.developer,
-                platform: req.body.platform
+                platform: req.body.platform,
+                released: req.body.released
             }).exec();
             res.redirect(item.url);
         }
