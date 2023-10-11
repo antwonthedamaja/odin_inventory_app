@@ -36,14 +36,18 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 exports.item_create_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
-    body('condition').trim().isIn('New', 'Used').escape(),
+    body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
     body('stock').trim().notEmpty().isInt({ min: 0 }),
-    body('category').trim().notEmpty().escape(),
+    body('category').trim().notEmpty().escape().custom(value => {
+        if (!mongoose.isValidObjectId(value)) {
+            throw new Error("Category value is not a valid ObjectID");
+        }
+    }),
     body('price').trim().notEmpty().isInt({ min: 0 }),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
-        if (errors.isEmpty() && mongoose.isValidObjectId(req.body.category)) {
+        if (errors.isEmpty()) {
             const item = new Item({
                 name: req.body.name,
                 description: req.body.description,
@@ -58,10 +62,35 @@ exports.item_create_post = [
     })
 ]
 
-exports.item_delete_post = asyncHandler(async (req, res, next) => {
+exports.item_delete_post = [
     
-})
+]
 
-exports.item_update_post = asyncHandler(async (req, res, next) => {
-    
-})
+exports.item_update_post = [
+    body('name').trim().notEmpty().escape(),
+    body('description').trim().notEmpty().escape(),
+    body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
+    body('stock').trim().notEmpty().isInt({ min: 0 }),
+    body('category').trim().notEmpty().escape().custom(value => {
+        if (!mongoose.isValidObjectId(value)) {
+            throw new Error("Category value is not a valid ObjectID");
+        }
+    }),
+    body('price').trim().notEmpty().isInt({ min: 0 }),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        if (errors.isEmpty()) {
+            await Item.findByIdAndUpdate(req.params.id, {
+                name: req.body.name,
+                description: req.body.description,
+                condition: req.body.condition,
+                stock: req.body.stock,
+                category: req.body.category,
+                price: req.body.price
+            }).exec();
+            const item = await Item.findById(req.params.id, "url").exec();
+            res.redirect(item.url);
+        }
+    })
+]
