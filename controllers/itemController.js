@@ -43,7 +43,7 @@ exports.item_create_post = [
             throw new Error("Genre value is not a valid ObjectID");
         }
     }),
-    body('price').trim().notEmpty().isInt({ min: 0 }),
+    body('developer').trim().notEmpty().escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -54,7 +54,7 @@ exports.item_create_post = [
                 condition: req.body.condition,
                 stock: req.body.stock,
                 genre: req.body.genre,
-                price: req.body.price
+                developer: req.body.developer
             })
             await item.save();
             res.redirect(item.url);
@@ -77,7 +77,7 @@ exports.item_update_post = [
             throw new Error("Genre value is not a valid ObjectID");
         }
     }),
-    body('price').trim().notEmpty().isInt({ min: 0 }),
+    body('developer').trim().notEmpty().escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -88,7 +88,7 @@ exports.item_update_post = [
                 condition: req.body.condition,
                 stock: req.body.stock,
                 genre: req.body.genre,
-                price: req.body.price
+                developer: req.body.developer
             }).exec();
             res.redirect(item.url);
         }

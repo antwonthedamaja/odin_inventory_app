@@ -6,8 +6,8 @@ const itemSchema = new Schema({
     description: { type: String, required: true },
     condition: { type: String, enum: ["New", "Used", "Digital"], required: true },
     stock: { type: Number, min: 0, required: true },
-    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
-    price: { type: Number, min: 0, required: true }
+    genre: { type: Schema.Types.ObjectId, ref: 'Genre', required: true },
+    developer: { type: String, required: true }
 });
 
 itemSchema.virtual('url').get(function() {
