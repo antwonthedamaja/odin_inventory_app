@@ -37,7 +37,7 @@ exports.item_create_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
     body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
-    body('stock').trim().notEmpty().isInt({ min: 0 }),
+    body('stock').trim().notEmpty().isInt({ min: 0 }.optional()),
     body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
             throw new Error("Genre value is not a valid ObjectID");
@@ -71,7 +71,7 @@ exports.item_update_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
     body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
-    body('stock').trim().notEmpty().isInt({ min: 0 }),
+    body('stock').trim().notEmpty().isInt({ min: 0 }).optional(),
     body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
             throw new Error("Genre value is not a valid ObjectID");

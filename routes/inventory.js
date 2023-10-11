@@ -27,7 +27,7 @@ router.post('/items/:id/delete', item_controller.item_delete_post)
 
 router.post('/items/:id/update', item_controller.item_update_post)
 
-// Category routes
+// Genre routes
 // GET
 router.get('/genres', genre_controller.genre_index)
 
