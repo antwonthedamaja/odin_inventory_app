@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const categorySchema = new Schema({
+const genreSchema = new Schema({
     name: { type: String, unique: true, required: true },
     description: { type: String, required: true }
 });
 
-categorySchema.virtual('url').get(function() {
-    return `/category/${this.name}`;
+genreSchema.virtual('url').get(function() {
+    return `/genre/${this.name}`;
 });
 
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = mongoose.model("Genre", genreSchema);
