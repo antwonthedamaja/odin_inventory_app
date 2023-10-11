@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const category_controller = require('../controllers/categoryController')
+const genre_controller = require('../controllers/genreController')
 const item_controller = require('../controllers/itemController')
 
 /* GET home page. */
@@ -29,20 +29,20 @@ router.post('/items/:id/update', item_controller.item_update_post)
 
 // Category routes
 // GET
-router.get('/categories', category_controller.category_index)
+router.get('/genres', genre_controller.genre_index)
 
-router.get('/categories/create', category_controller.category_create_get)
+router.get('/genres/create', genre_controller.genre_create_get)
 
-router.get('/categories/:id', category_controller.category_get)
+router.get('/genres/:id', genre_controller.genre_get)
 
-router.get('/categories/:id/delete', category_controller.category_delete_get)
+router.get('/genres/:id/delete', genre_controller.genre_delete_get)
 
-router.get('/categories/:id/update', category_controller.category_update_get)
+router.get('/genres/:id/update', genre_controller.genre_update_get)
 // POST
-router.post('/categories/create', category_controller.category_create_post)
+router.post('/genres/create', genre_controller.genre_create_post)
 
-router.post('/categories/:id/delete', category_controller.category_delete_post)
+router.post('/genres/:id/delete', genre_controller.genre_delete_post)
 
-router.post('/categories/:id/update', category_controller.category_update_post)
+router.post('/genres/:id/update', genre_controller.genre_update_post)
 
 module.exports = router;

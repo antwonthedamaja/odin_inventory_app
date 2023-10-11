@@ -1,5 +1,5 @@
 const Item = require("../models/item");
-const Category = require("../models/category");
+const Genre = require("../models/genre");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
@@ -13,12 +13,12 @@ exports.item_index = asyncHandler(async (req, res, next) => {
 
 exports.item_create_get = asyncHandler(async (req, res, next) => {
     const items = await Item.find({}, "name").exec();
-    const categories = await Category.find({}, "name").exec();
-    res.render("item_create", { items: items, categories: categories });
+    const genres = await Genre.find({}, "name").exec();
+    res.render("item_create", { items: items, genres: genres });
 })
 
 exports.item_get = asyncHandler(async (req, res, next) => {
-    const item = await Item.findById(req.params.id).populate("category").exec();
+    const item = await Item.findById(req.params.id).populate("genre").exec();
     res.render("item", { item: item });
 })
 
@@ -28,7 +28,7 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 })
 
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-    const item = await Item.findById(req.params.id).populate("category").exec();
+    const item = await Item.findById(req.params.id).populate("genre").exec();
     res.render("item_update", { item: item });
 })
 
@@ -38,9 +38,9 @@ exports.item_create_post = [
     body('description').trim().notEmpty().escape(),
     body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
     body('stock').trim().notEmpty().isInt({ min: 0 }),
-    body('category').trim().notEmpty().escape().custom(value => {
+    body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
-            throw new Error("Category value is not a valid ObjectID");
+            throw new Error("Genre value is not a valid ObjectID");
         }
     }),
     body('price').trim().notEmpty().isInt({ min: 0 }),
@@ -53,7 +53,7 @@ exports.item_create_post = [
                 description: req.body.description,
                 condition: req.body.condition,
                 stock: req.body.stock,
-                category: req.body.category,
+                genre: req.body.genre,
                 price: req.body.price
             })
             await item.save();
@@ -72,9 +72,9 @@ exports.item_update_post = [
     body('description').trim().notEmpty().escape(),
     body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
     body('stock').trim().notEmpty().isInt({ min: 0 }),
-    body('category').trim().notEmpty().escape().custom(value => {
+    body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
-            throw new Error("Category value is not a valid ObjectID");
+            throw new Error("Genre value is not a valid ObjectID");
         }
     }),
     body('price').trim().notEmpty().isInt({ min: 0 }),
@@ -87,7 +87,7 @@ exports.item_update_post = [
                 description: req.body.description,
                 condition: req.body.condition,
                 stock: req.body.stock,
-                category: req.body.category,
+                genre: req.body.genre,
                 price: req.body.price
             }).exec();
             res.redirect(item.url);
