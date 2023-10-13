@@ -8,28 +8,28 @@ const mongoose = require('mongoose')
 // GET
 exports.item_index = asyncHandler(async (req, res, next) => {
     const allItems = await Item.find().exec();
-    res.render("item_index", { items: allItems });
+    res.render("pages/item_index", { items: allItems });
 })
 
 exports.item_create_get = asyncHandler(async (req, res, next) => {
     const items = await Item.find({}, "name").exec();
     const genres = await Genre.find({}, "name").exec();
-    res.render("item_create", { items: items, genres: genres });
+    res.render("pages/item_create", { items: items, genres: genres });
 })
 
 exports.item_get = asyncHandler(async (req, res, next) => {
     const item = await Item.findById(req.params.id).populate("genre").exec();
-    res.render("item", { item: item });
+    res.render("pages/item", { item: item });
 })
 
 exports.item_delete_get = asyncHandler(async (req, res, next) => {
     const item = await Item.findById(req.params.id, "name").exec();
-    res.render("item_delete", { item: item });
+    res.render("pages/item_delete", { item: item });
 })
 
 exports.item_update_get = asyncHandler(async (req, res, next) => {
     const item = await Item.findById(req.params.id).populate("genre").exec();
-    res.render("item_update", { item: item });
+    res.render("pages/item_update", { item: item });
 })
 
 // POST

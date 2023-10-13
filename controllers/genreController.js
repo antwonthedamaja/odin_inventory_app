@@ -7,28 +7,28 @@ const asyncHandler = require("express-async-handler");
 // GET
 exports.genre_index = asyncHandler(async (req, res, next) => {
     const allGenres = await Genre.find().exec();
-    res.render("genre_index", { genres: allGenres })
+    res.render("pages/genre_index", { genres: allGenres })
 })
 
 exports.genre_create_get = asyncHandler(async (req, res, next) => {
     const genres = await Genre.find({}, "name").exec();
-    res.render("genre_create", { genres: genres })
+    res.render("pages/genre_create", { genres: genres })
 })
 
 exports.genre_get = asyncHandler(async (req, res, next) => {
     const genre = await Genre.findById(req.params.id).exec();
     const items = await Item.find({ genre: req.params.id }).exec();
-    res.render("genre", { genre: genre, items: items });
+    res.render("pages/genre", { genre: genre, items: items });
 })
 
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
     const genre = await Genre.findById(req.params.id, "name").exec();
-    res.render("genre_delete", { genre: genre });
+    res.render("pages/genre_delete", { genre: genre });
 })
 
 exports.genre_update_get = asyncHandler(async (req, res, next) => {
     const genre = await Genre.findById(req.params.id).exec();
-    res.render("genre_update", { genre: genre });
+    res.render("pages/genre_update", { genre: genre });
 })
 
 // POST

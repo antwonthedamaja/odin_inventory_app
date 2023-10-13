@@ -1,12 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
+const Genre = require("../models/genre");
+const Item = require("../models/item");
+
 const genre_controller = require('../controllers/genreController')
 const item_controller = require('../controllers/itemController')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
+router.get('/', async function(req, res, next) {
+  const [
+    numItems,
+    numGenres,
+  ] = await Promise.all([
+    Item.countDocuments({}).exec(),
+    Genre.countDocuments({}).exec(),
+  ]);
+
+  res.render('pages/index', { item_count: numItems, genre_count: numGenres });
 });
 
 // Item routes
