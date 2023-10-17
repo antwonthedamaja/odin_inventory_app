@@ -7,11 +7,11 @@ const genreSchema = new Schema({
 });
 
 genreSchema.virtual('url').get(function() {
-    return `/genres/${this.name}`;
+    return `/genres/${this._id}`;
 });
 
 genreSchema.virtual('storage').get(function() {
-    return `images/${this.name}.jpg`;
+    return `/images/${this.name}.jpg`;
 });
 
 module.exports = mongoose.model("Genre", genreSchema);

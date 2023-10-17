@@ -16,8 +16,8 @@ exports.genre_create_get = asyncHandler(async (req, res, next) => {
 })
 
 exports.genre_get = asyncHandler(async (req, res, next) => {
-    const genre = await Genre.findOne({ name: req.params.id }).exec();
-    const items = await Item.find({ genre: genre._id }).exec();
+    const genre = await Genre.findById(req.params.id).exec();
+    const items = await Item.find({ genre: req.params.id }).sort({ name: 1 }).exec();
     res.render("pages/genre", { genre: genre, items: items });
 })
 

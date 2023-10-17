@@ -13,11 +13,11 @@ const itemSchema = new Schema({
 });
 
 itemSchema.virtual('url').get(function() {
-    return `/inventory/${this._id}`;
+    return `/items/${this._id}`;
 });
 
 itemSchema.virtual('storage').get(function() {
-    return `images/${this.name}`;
+    return `/images/${this.name}.jpg`;
 });
 
 module.exports = mongoose.model("Item", itemSchema);

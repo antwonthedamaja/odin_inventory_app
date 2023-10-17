@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 
 // GET
 exports.item_index = asyncHandler(async (req, res, next) => {
-    const allItems = await Item.find().exec();
+    const allItems = await Item.find().sort({ name: 1 }).exec();
     res.render("pages/item_index", { items: allItems });
 })
 
