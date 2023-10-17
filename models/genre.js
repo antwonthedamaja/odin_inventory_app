@@ -7,7 +7,7 @@ const genreSchema = new Schema({
 });
 
 genreSchema.virtual('url').get(function() {
-    return `/genre/${this.name}`;
+    return `/genres/${this.name}`;
 });
 
 genreSchema.virtual('storage').get(function() {

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <%- include('../partials/sidebar_nav'); %>
+        <div class="col-sm-10 p-3">
+            <h1><%= genre.name %></h1>
+            <ul class="px-4 py-3">
+                <% items.forEach(item => { %>
+                    <li>
+                        <a href="<%= item.url %>"><%= item.name %> (<%= item.platform %>)</a>
+                        <span><%= item.developer + ", " + item.released %></span>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
