@@ -17,7 +17,7 @@ itemSchema.virtual('url').get(function() {
 });
 
 itemSchema.virtual('storage').get(function() {
-    return `../public/images/${this.name}/`;
+    return `images/${this.name}`;
 });
 
 module.exports = mongoose.model("Item", itemSchema);

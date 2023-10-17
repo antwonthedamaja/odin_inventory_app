@@ -10,4 +10,8 @@ genreSchema.virtual('url').get(function() {
     return `/genre/${this.name}`;
 });
 
+genreSchema.virtual('storage').get(function() {
+    return `images/${this.name}.jpg`;
+});
+
 module.exports = mongoose.model("Genre", genreSchema);

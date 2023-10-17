@@ -59,12 +59,12 @@ async function createGenres() {
   console.log("Adding genres");
   await Promise.all([
     genreCreate(0, "First-person shooter", "I must schüt the demons"),
-    genreCreate(1, "Action/Adventure", "Take this! It's dangerous to go alone"),
-    genreCreate(2, "Horror", 'Your mom would hate these games'),
+    genreCreate(1, "Action-Adventure", "Take this! It's dangerous to go alone"),
+    genreCreate(2, "Survival Horror", 'Your mom would hate these games'),
     genreCreate(3, "Platformer", "Bing Bing Wahoo"),
     genreCreate(4, "RPG", "When your buds are not available for DnD night, these games will work instead"),
     genreCreate(5, "Stealth", "Hiding alone in the dark, just like my social life"),
-    genreCreate(6, "Puzzle", "Brain-scratchers. And who said video-games couldn't improve your brainpower?")
+    genreCreate(6, "Puzzle", "Brain-scratchers. And who said video-games were a waste of time?")
   ]);
 }
 
