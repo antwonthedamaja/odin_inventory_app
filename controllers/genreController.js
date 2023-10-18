@@ -23,7 +23,8 @@ exports.genre_get = asyncHandler(async (req, res, next) => {
 
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
     const genre = await Genre.findById(req.params.id, "name").exec();
-    res.render("pages/genre_delete", { genre: genre });
+    const items = await Item.find({ genre: req.params.id });
+    res.render("pages/genre_delete", { genre: genre, items: items });
 })
 
 exports.genre_update_get = asyncHandler(async (req, res, next) => {
@@ -50,7 +51,7 @@ exports.genre_create_post = [
 ]
 
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-    await Genre.findByIdAndDelete(req.params.id).exec();
+    await Genre.findByIdAndDelete(req.body.id).exec();
     res.redirect("/genres")
 })
 

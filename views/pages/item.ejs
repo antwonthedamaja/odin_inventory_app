@@ -17,7 +17,7 @@
                             <img src="<%= item.storage %>" class="img-fluid rounded-start">
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body p-4">
+                            <div class="card-body p-4 d-flex flex-column h-100">
                                 <h2 class="card-title"><b><%= item.name %></b>,<span> <%= item.released %></h2>
                                 <p class="card-text"><b><%= item.genre.name %></b></p>
                                 <p class="card-text"><%= item.description %></p>
@@ -25,6 +25,20 @@
                                 <p class="card-text">Platform: <%= item.platform %></p>
                                 <p class="card-text">Condition: <%= item.condition %></p>
                                 <p class="card-text">Stock: <%= item.stock %></p>
+                                  <div class="container mt-auto">
+                                    <div class="row">
+                                      <div class="col-auto">
+                                        <a href="<%= item._id %>/update">
+                                          <button class="btn btn-warning">Update?</button>
+                                        </a>
+                                      </div>
+                                      <div class="col-auto">
+                                        <a href="<%= item._id %>/delete">
+                                          <button class="btn btn-danger">Delete?</button>
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
                             </div>
                         </div>
                     </div>

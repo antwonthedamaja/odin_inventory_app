@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <%- include('../partials/sidebar_nav'); %>
+        <div class="col-sm-10 p-3">
+            <h1>Delete genre?</h1>
+            <% if (items.length > 0) { %>
+            <p><strong>You may not delete the <%= genre.name %> genre until you update or delete every item under it</strong></p>
+            <a href="/genres/<%= genre._id %>/">
+                <button class="btn btn-primary" type="button">Go back</button>
+            </a>
+            <% } else { %>
+            <p><strong>Are you sure you want to delete the <%= genre.name %> genre?</strong></p>
+            <div class="row">
+                <form method="post" action="">
+                    <div class="form-group">
+                        <input type="hidden" name="id" value="<%= genre._id %>" required>
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <a href="/genres/<%= genre._id %>/">
+                            <button class="btn btn-primary" type="button">Go back</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

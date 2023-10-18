@@ -74,7 +74,7 @@ exports.item_create_post = [
 ]
 
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
-    await Item.findByIdAndDelete(req.params.id).exec();
+    await Item.findByIdAndDelete(req.body.id).exec();
     res.redirect("/items");
 })
 
