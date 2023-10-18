@@ -24,11 +24,7 @@
                                 <p class="card-text">Developer: <%= item.developer %></p>
                                 <p class="card-text">Platform: <%= item.platform %></p>
                                 <p class="card-text">Condition: <%= item.condition %></p>
-                                <% if (item.condition === "Digital") { %>
-                                    <p class="card-text">Stock: Digital</p>
-                                <% } else { %>
-                                    <p class="card-text">Stock: <%= item.stock %></p>
-                                <% } %>
+                                <p class="card-text">Stock: <%= item.stock %></p>
                             </div>
                         </div>
                     </div>

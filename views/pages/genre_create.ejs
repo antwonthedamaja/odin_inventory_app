@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <%- include('../partials/sidebar_nav'); %>
+        <div class="col-sm-10 p-3">
+            <h1>Create new genre?</h1>
+            <form class="p-2 pe-5" method="POST">
+              <div class="form-group">
+                <label class="form-label" for="name">Name of genre:</label>
+                <input class="form-control" type="text" name="name" placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="description">Description:</label>
+                <input class="form-control" type="text" name="description" placeholder="Description" required>
+              </div>
+              <button class="btn btn-primary mt-3" type="submit">Submit</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

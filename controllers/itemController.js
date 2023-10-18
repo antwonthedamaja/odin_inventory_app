@@ -12,9 +12,8 @@ exports.item_index = asyncHandler(async (req, res, next) => {
 })
 
 exports.item_create_get = asyncHandler(async (req, res, next) => {
-    const items = await Item.find({}, "name").exec();
-    const genres = await Genre.find({}, "name").exec();
-    res.render("pages/item_create", { items: items, genres: genres });
+    const genres = await Genre.find().exec();
+    res.render("pages/item_create", { genres: genres });
 })
 
 exports.item_get = asyncHandler(async (req, res, next) => {
