@@ -10,15 +10,25 @@
       <div class="row">
         <%- include('../partials/sidebar_nav'); %>
         <div class="col-sm-10 p-3">
-            <h1><%= genre.name %></h1>
+            <h1><%- genre.name %></h1>
             <ul class="px-4 py-3">
                 <% items.forEach(item => { %>
                     <li>
-                        <a href="<%= item.url %>"><%= item.name %> (<%= item.platform %>, <%= item.condition %>)</a>
-                        <span><%= item.developer + ", " + item.released %></span>
+                        <a href="<%- item.url %>"><%- item.name %> (<%- item.platform %>, <%- item.condition %>)</a>
+                        <span><%- item.developer + ", " + item.released %></span>
                     </li>
                 <% }) %>
             </ul>
+            <div class="row">
+              <div class="col-auto">
+                <a href="<%- genre._id %>/update">
+                  <button class="btn btn-warning">Update?</button>
+                </a>
+              </div>
+              <div class="col-auto">
+                <a href="<%- genre._id %>/delete">
+                  <button class="btn btn-danger">Delete?</button>
+                </a>
         </div>
       </div>
     </div>

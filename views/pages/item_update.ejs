@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <%- include('../partials/sidebar_nav'); %>
+        <div class="col-sm-10 p-3">
+          <h1>Update item?</h1>
+          <form class="p-2 pe-5" method="POST" action="">
+            <div class="form-group">
+              <label class="form-label" for="name">Name of game:</label>
+              <input class="form-control" type="text" placeholder="Game name" name="name" value="<%- item.name %>" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="description">Description:</label>
+              <input class="form-control" type="text" placeholder="Game description" name="description" value="<%- item.description %>" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="developer">Developer:</label>
+              <input class="form-control" type="text" placeholder="Developer" name="developer" value="<%- item.developer %>" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="genre">Genre:</label>
+              <select class="form-select" name="genre">
+                <% genres.forEach(genre => { %>
+                  <% if (item.genre.name === genre.name) { %>
+                    <option value="<%- genre._id %>" selected><%- genre.name %></option>
+                  <% } else { %>
+                    <option value="<%- genre._id %>"><%- genre.name %></option>
+                  <% } %>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="condition">Condition:</label>
+              <select class="form-select" id="condition" name="condition">
+                <option value="">--Please select an option--</option>
+                <option value="New" <%- item.condition === 'New' ? 'selected' : '' %>>New</option>
+                <option value="Used" <%- item.condition === 'Used' ? 'selected' : '' %>>Used</option>
+                <option value="Digital" <%- item.condition === 'Digital' ? 'selected' : '' %>>Digital</option>
+              </select>
+              <label class="form-label" for="stock">Stock:</label>
+              <% if (item.condition === "Digital") { %>
+                <input class="form-control" id="stock" type="text" placeholder="Number in stock" value="Digital store key" name="stock" readonly required>
+              <% } else { %>
+                <input class="form-control" id="stock" type="number" min="0" placeholder="Number in stock" value="<%- item.stock %>" name="stock" required>
+              <% } %>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="platform">Platform:</label>
+              <input class="form-control" type="text" placeholder="Platform" name="platform" value="<%- item.platform %>" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="released">Release year (in XXXX format):</label>
+              <input class="form-control" type="number" placeholder="Release year" min="1900" name="released" value="<%- item.released %>" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="image">Upload cover image (1mb max, optional)</label>
+              <input class="form-control" type="file" name="image">
+            </div>
+            <button class="btn btn-primary mt-3" type="submit">Submit</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  const condition = document.getElementById('condition');
+  const stock = document.getElementById('stock');
+
+  condition.addEventListener('change', () => {
+    if (condition.value === "Digital") {
+      stock.setAttribute('readonly', '');
+      stock.setAttribute('type', 'text');
+      stock.value = "Digital store key";
+    } else {
+      stock.removeAttribute('disabled');
+      stock.setAttribute('type', 'number');
+      stock.value = '';
+    }
+  });
+</script>
+</html>

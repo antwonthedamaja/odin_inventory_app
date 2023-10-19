@@ -27,15 +27,16 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 })
 
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-    const item = await Item.findById(req.params.id).populate("genre").exec();
-    res.render("pages/item_update", { item: item });
+    const item = await Item.findById(req.params.id).populate('genre').exec();
+    const genres = await Genre.find().exec();
+    res.render("pages/item_update", { item: item, genres: genres });
 })
 
 // POST
 exports.item_create_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
-    body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
+    body('condition').trim().isIn(['New', 'Used', 'Digital']).escape(),
     body('stock').trim().notEmpty().escape().custom(value => {
         if (typeof parseInt(value) === Number && parseInt(value) < 0) {
             throw new Error('Stock must be greater than 0')
@@ -81,15 +82,8 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
 exports.item_update_post = [
     body('name').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
-    body('condition').trim().isIn('New', 'Used', 'Digital').escape(),
-    body('stock').trim().notEmpty().escape().custom(value => {
-        if (typeof parseInt(value) === Number && parseInt(value) < 0) {
-            throw new Error('Stock must be greater than 0')
-        } else if (typeof value === String && value != "Digital store key") {
-            throw new Error('Value is not valid')
-        }
-        return true;
-    }),
+    body('condition').trim().isIn(['New', 'Used', 'Digital']).escape(),
+    body('stock').trim().notEmpty().escape(),
     body('genre').trim().notEmpty().escape().custom(value => {
         if (!mongoose.isValidObjectId(value)) {
             throw new Error("Genre value is not a valid ObjectID");
@@ -114,6 +108,8 @@ exports.item_update_post = [
                 released: req.body.released
             }).exec();
             res.redirect(item.url);
+        } else {
+            console.log(errors);
         }
     })
 ]

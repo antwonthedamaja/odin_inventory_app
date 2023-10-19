@@ -12,8 +12,8 @@
             <ul class="px-4 py-3">
               <% items.forEach(item => { %>
               <li>
-                <a href="<%= item.url %>"><%= item.name %> (<%= item.platform %>, <%= item.condition %>)</a>
-                <span><%= item.developer + ", " + item.released %></span>
+                <a href="<%- item.url %>"><%- item.name %> (<%- item.platform %>, <%- item.condition %>)</a>
+                <span><%- item.developer + ", " + item.released %></span>
               </li>
               <% }) %>
             </ul>

@@ -21,10 +21,14 @@
                 <input class="form-control" type="text" placeholder="Game description" name="description" required>
               </div>
               <div class="form-group">
+                <label class="form-label" for="developer">Developer:</label>
+                <input class="form-control" type="text" placeholder="Developer" name="developer" required>
+              </div>
+              <div class="form-group">
                 <label class="form-label" for="genre">Genre:</label>
                 <select class="form-select" name="genre">
                   <% genres.forEach(genre => { %>
-                    <option value="<%= genre._id %>"><%= genre.name %></option>
+                    <option value="<%- genre._id %>"><%- genre.name %></option>
                   <% }) %>
                 </select>
               </div>
@@ -63,9 +67,8 @@
 
     condition.addEventListener('change', () => {
       if (condition.value === "Digital") {
-        stock.setAttribute('disabled', '');
+        stock.setAttribute('readonly', '');
         stock.setAttribute('type', 'text');
-        stock.setAttribute('placeholder', 'Digital store key');
         stock.value = "Digital store key";
       } else {
         stock.removeAttribute('disabled');
