@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <head>
-        <%- include('../partials/head'); %>
-    </head>
+    <%- include('../partials/head'); %>
   </head>
   <body>
     <div class="container-fluid">
@@ -15,10 +13,18 @@
                 <form method="post" action="">
                     <div class="form-group">
                         <input type="hidden" name="id" value="<%- item._id %>" required>
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                        <a href="/items/<%- item._id %>/">
-                            <button class="btn btn-primary" type="button">Go back</button>
-                        </a>
+                        <div class="row">
+                          <div class="col-auto">
+                            <a href="<%- item._id %>/update">
+                              <button class="btn btn-warning">Update?</button>
+                            </a>
+                          </div>
+                          <div class="col-auto">
+                            <a href="<%- item._id %>/delete">
+                              <button class="btn btn-danger">Delete?</button>
+                            </a>
+                          </div>
+                        </div>
                     </div>
                 </form>
             </div>

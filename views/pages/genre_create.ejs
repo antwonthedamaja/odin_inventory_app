@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <head>
-        <%- include('../partials/head'); %>
-    </head>
+    <%- include('../partials/head'); %>
   </head>
   <body>
     <div class="container-fluid">
@@ -13,7 +11,7 @@
             <h1>Create new genre?</h1>
             <form class="p-2 pe-5" method="POST">
               <div class="form-group">
-                <label class="form-label" for="name">Name of genre:</label>
+                <label class="form-label" for="name">Name of genre (note: You cannot change this later):</label>
                 <input class="form-control" type="text" name="name" placeholder="Name" required>
               </div>
               <div class="form-group">
@@ -22,7 +20,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="image">Add genre cover (16:9 aspect ratio preferred, max size 1mb):</label>
-                <input class="form-control" type="file" name="image" required>
+                <input class="form-control" type="file" name="image">
               </div>
               <button class="btn btn-primary mt-3" type="submit">Submit</button>
             </form>

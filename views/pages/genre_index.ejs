@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <head>
-        <%- include('../partials/head'); %>
-    </head>
+    <%- include('../partials/head'); %>
   </head>
   <body>
     <div class="container-fluid">
@@ -17,7 +15,7 @@
                       <div class="col">
                         <a class="text-reset text-decoration-none" href="<%- genre.url %>">
                           <div class="card h-100">
-                            <img src="<%= genre.storage %>" class="card-img-top">
+                            <img src="<%- genre.storage %>" class="card-img-top">
                             <div class="card-body">
                               <h4 class="card-title"><%- genre.name %></h4>
                               <p class="card-text"><%- genre.description %></p>

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <head>
-        <%- include('../partials/head'); %>
-    </head>
+    <%- include('../partials/head'); %>
   </head>
   <body>
     <div class="container-fluid vh-100">
@@ -14,7 +12,7 @@
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="<%= item.storage %>" class="img-fluid rounded-start">
+                            <img src="<%- item.storage %>" class="img-fluid rounded-start">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body p-4 d-flex flex-column h-100">

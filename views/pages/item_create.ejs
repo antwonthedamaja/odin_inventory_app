@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <head>
-        <%- include('../partials/head'); %>
-    </head>
+    <%- include('../partials/head'); %>
   </head>
   <body>
     <div class="container-fluid">
@@ -13,7 +11,7 @@
             <h1>Create new item?</h1>
             <form class="p-2 pe-5" method="POST">
               <div class="form-group">
-                <label class="form-label" for="name">Name of game:</label>
+                <label class="form-label" for="name">Name of game (note: You cannot change this later):</label>
                 <input class="form-control" type="text" placeholder="Game name" name="name" required>
               </div>
               <div class="form-group">
@@ -71,7 +69,7 @@
         stock.setAttribute('type', 'text');
         stock.value = "Digital store key";
       } else {
-        stock.removeAttribute('disabled');
+        stock.removeAttribute('readonly');
         stock.setAttribute('type', 'number');
         stock.setAttribute('placeholder', 'Number in stock');
         stock.value = '';
