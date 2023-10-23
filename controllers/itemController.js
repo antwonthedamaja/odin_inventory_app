@@ -53,7 +53,7 @@ exports.item_create_post = [
     }),
     body('developer').trim().notEmpty().escape(),
     body('platform').trim().notEmpty().escape(),
-    body('released').trim().notEmpty().isLength(4).isNumeric(),
+    body('released').trim().notEmpty().isLength({min: 4, max: 4}).isNumeric(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -70,6 +70,8 @@ exports.item_create_post = [
             })
             await item.save();
             res.redirect(item.url);
+        } else {
+            console.log(errors);
         }
     })
 ]
@@ -92,7 +94,7 @@ exports.item_update_post = [
     }),
     body('developer').trim().notEmpty().escape(),
     body('platform').trim().notEmpty().escape(),
-    body('released').trim().notEmpty().isLength(4).isNumeric(),
+    body('released').trim().notEmpty().isLength({min: 4, max: 4}).isNumeric(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);

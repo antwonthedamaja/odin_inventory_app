@@ -15,14 +15,12 @@
                         <input type="hidden" name="id" value="<%- item._id %>" required>
                         <div class="row">
                           <div class="col-auto">
-                            <a href="<%- item._id %>/update">
-                              <button class="btn btn-warning">Update?</button>
+                            <a href="../<%- item._id %>">
+                              <button class="btn btn-primary" type="button">Go back</button>
                             </a>
                           </div>
                           <div class="col-auto">
-                            <a href="<%- item._id %>/delete">
-                              <button class="btn btn-danger">Delete?</button>
-                            </a>
+                            <button class="btn btn-danger" type="submit">Delete</button>
                           </div>
                         </div>
                     </div>

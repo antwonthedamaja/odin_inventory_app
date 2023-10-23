@@ -9,7 +9,7 @@
         <%- include('../partials/sidebar_nav'); %>
         <div class="col-sm-10 p-3">
             <h1>Create new item?</h1>
-            <form class="p-2 pe-5" method="POST">
+            <form class="p-2 pe-5" method="POST" enctype="multipart/form-data">
               <div class="form-group">
                 <label class="form-label" for="name">Name of game (note: You cannot change this later):</label>
                 <input class="form-control" type="text" placeholder="Game name" name="name" required>
@@ -50,8 +50,8 @@
                 <input class="form-control" type="number" placeholder="Release year" min="1900" name="released" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="image">Upload cover image (1mb max)</label>
-                <input class="form-control" type="file" name="image" required>
+                <label class="form-label" for="image">Upload cover image: <small>(1mb max, jpg/png format only, may skip if entry already exists under same name)</small></label>
+                <input class="form-control" type="file" name="image" accept=".jpg, .jpeg, .png">
               </div>
               <button class="btn btn-primary mt-3" type="submit">Submit</button>
             </form>
@@ -71,7 +71,6 @@
       } else {
         stock.removeAttribute('readonly');
         stock.setAttribute('type', 'number');
-        stock.setAttribute('placeholder', 'Number in stock');
         stock.value = '';
       }
     });

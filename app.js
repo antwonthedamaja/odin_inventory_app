@@ -28,6 +28,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// multer setup
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/images/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${req.body.name}.jpg`);
+  }
+});
+
+app.use(
+  multer({ storage: storage }).single("image")
+);
+
 app.use('/', inventoryRouter);
 
 // catch 404 and forward to error handler

@@ -9,7 +9,7 @@
         <%- include('../partials/sidebar_nav'); %>
         <div class="col-sm-10 p-3">
             <h1>Create new genre?</h1>
-            <form class="p-2 pe-5" method="POST">
+            <form class="p-2 pe-5" method="POST" enctype="multipart/form-data">
               <div class="form-group">
                 <label class="form-label" for="name">Name of genre (note: You cannot change this later):</label>
                 <input class="form-control" type="text" name="name" placeholder="Name" required>
@@ -19,8 +19,8 @@
                 <input class="form-control" type="text" name="description" placeholder="Description" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="image">Add genre cover (16:9 aspect ratio preferred, max size 1mb):</label>
-                <input class="form-control" type="file" name="image">
+                <label class="form-label" for="image">Add genre cover: <small>(16:9 aspect ratio preferred, jpg/png format only, max size 1mb)</small></label>
+                <input class="form-control" type="file" name="image" accept=".jpg, .jpeg, .png">
               </div>
               <button class="btn btn-primary mt-3" type="submit">Submit</button>
             </form>

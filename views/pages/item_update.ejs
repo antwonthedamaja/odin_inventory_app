@@ -9,7 +9,7 @@
         <%- include('../partials/sidebar_nav'); %>
         <div class="col-sm-10 p-3">
           <h1>Update item?</h1>
-          <form class="p-2 pe-5" method="POST" action="">
+          <form class="p-2 pe-5" method="POST" action="" enctype="multipart/form-data">
             <div class="form-group">
               <label class="form-label" for="name">Name of game:</label>
               <input class="form-control" type="text" placeholder="Game name" name="name" value="<%- item.name %>" readonly required>
@@ -58,8 +58,8 @@
               <input class="form-control" type="number" placeholder="Release year" min="1900" name="released" value="<%- item.released %>" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="image">Upload cover image (1mb max, optional)</label>
-              <input class="form-control" type="file" name="image">
+              <label class="form-label" for="image">Upload cover image: <small>(1mb max, jpg/png format only, optional)</small></label>
+              <input class="form-control" type="file" name="image" accept=".jpg, .jpeg, .png">
             </div>
             <button class="btn btn-primary mt-3" type="submit">Submit</button>
           </form>

@@ -11,8 +11,8 @@
             <div class="container d-flex align-content-center justify-content-center">
                 <div class="card">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="<%- item.storage %>" class="img-fluid rounded-start">
+                        <div class="col-md-4 d-flex">
+                            <img src="<%- item.storage %>" class="img-fluid rounded-start flex-grow-0 m-auto">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body p-4 d-flex flex-column h-100">
@@ -27,12 +27,12 @@
                                     <div class="row">
                                       <div class="col-auto">
                                         <a href="<%- item._id %>/update">
-                                          <button class="btn btn-warning">Update?</button>
+                                          <button class="btn btn-primary">Update</button>
                                         </a>
                                       </div>
                                       <div class="col-auto">
                                         <a href="<%- item._id %>/delete">
-                                          <button class="btn btn-danger">Delete?</button>
+                                          <button class="btn btn-danger">Delete</button>
                                         </a>
                                       </div>
                                     </div>

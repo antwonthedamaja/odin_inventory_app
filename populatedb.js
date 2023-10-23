@@ -98,6 +98,8 @@ async function createItems() {
     itemCreate("The Talos Principle", "This narrative-based puzzle game has the player taking the role of a robot with seemingly human consciousness inquires into the enigma of what makes a being truly conscious.", 
     "Digital", "Digital store key", genres[6]._id, "Croteam", "PC", 2014),
     itemCreate("Dark Souls", "Take control of the Chosen Undead, and decide whether to usher in a new Age of Fire or an Age of Dark in this dark fantasy universe.", 
-    "Digital", "Digital store key", genres[1]._id, "FromSoftware", "PC", 2011)
+    "Digital", "Digital store key", genres[1]._id, "FromSoftware", "PC", 2011),
+    itemCreate("Hollow Knight", "Hollow Knight is a classically styled 2D metroidvania across a vast interconnected world. Explore twisting caverns, ancient cities and deadly wastes; battle tainted creatures and befriend bizarre bugs; and solve ancient mysteries at the kingdom's heart.", 
+    "Digital", "Digital store key", genres[3]._id, "Team Cherry", "PC", 2017)
   ]);
 }
