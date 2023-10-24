@@ -11,8 +11,8 @@
             <h1>Delete genre?</h1>
             <% if (locals.items.length > 0) { %>
             <p><strong>You may not delete the <%- genre.name %> genre until you update or delete every item under the genre.</strong></p>
-            <a href="/genres/<%- genre._id %>/">
-                <button class="btn btn-primary" type="button">Go back</button>
+            <a href="../<%- item._id %>">
+              <button class="btn btn-primary" type="button">Go back</button>
             </a>
             <% } else { %>
             <p><strong>Are you sure you want to delete the <%- genre.name %> genre?</strong></p>
@@ -22,7 +22,9 @@
                         <input type="hidden" name="id" value="<%- genre._id %>" required>
                         <div class="row">
                           <div class="col-auto">
-                            <button class="btn btn-primary" type="button">Go back</button>
+                            <a href="../<%- genre._id %>">
+                              <button class="btn btn-primary" type="button">Go back</button>
+                            </a>
                           </div>
                           <div class="col-auto">
                             <a href="<%- genre._id %>/delete">

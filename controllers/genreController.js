@@ -4,15 +4,17 @@ const Item = require("../models/item");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
+const fileController = require('./fileController');
+
 // GET
 exports.genre_index = asyncHandler(async (req, res, next) => {
     const allGenres = await Genre.find().exec();
-    res.render("pages/genre_index", { genres: allGenres })
+    res.render("pages/genre_index", { genres: allGenres });
 })
 
 exports.genre_create_get = asyncHandler(async (req, res, next) => {
     const genres = await Genre.find({}, "name").exec();
-    res.render("pages/genre_create", { genres: genres })
+    res.render("pages/genre_create", { genres: genres });
 })
 
 exports.genre_get = asyncHandler(async (req, res, next) => {
@@ -45,14 +47,18 @@ exports.genre_create_post = [
                 description: req.body.description,
             })
             await genre.save();
+            if (req.file?.buffer) {
+                fileController.persistFile(req.body.name, req.file.buffer)
+            };
             res.redirect(genre.url);
         }
     })
 ]
 
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-    await Genre.findByIdAndDelete(req.body.id).exec();
-    res.redirect("/genres")
+    const genre = await Genre.findByIdAndDelete(req.body.id).exec();
+    fileController.deleteFile(genre.name);
+    res.redirect("/genres");
 })
 
 exports.genre_update_post = [
@@ -66,6 +72,9 @@ exports.genre_update_post = [
                 name: req.body.name,
                 description: req.body.description
             }).exec();
+            if (req.file?.buffer) {
+                fileController.persistFile(req.body.name, req.file.buffer)
+            };
             res.redirect(genre.url);
         }
     })

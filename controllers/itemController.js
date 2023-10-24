@@ -5,6 +5,8 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const mongoose = require('mongoose')
 
+const fileController = require('./fileController');
+
 // GET
 exports.item_index = asyncHandler(async (req, res, next) => {
     const allItems = await Item.find().sort({ name: 1 }).exec();
@@ -69,6 +71,9 @@ exports.item_create_post = [
                 released: req.body.released
             })
             await item.save();
+            if (req.file?.buffer) {
+                fileController.persistFile(req.body.name, req.file.buffer)
+            };
             res.redirect(item.url);
         } else {
             console.log(errors);
@@ -77,7 +82,9 @@ exports.item_create_post = [
 ]
 
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
-    await Item.findByIdAndDelete(req.body.id).exec();
+    const item = await Item.findByIdAndDelete(req.body.id).exec();
+    const nameCheck = await Item.find({ name: item.name }).exec();
+    if (nameCheck.length === 0) fileController.deleteFile(item.name); 
     res.redirect("/items");
 })
 
@@ -109,6 +116,9 @@ exports.item_update_post = [
                 platform: req.body.platform,
                 released: req.body.released
             }).exec();
+            if (req.file?.buffer) {
+                fileController.persistFile(req.body.name, req.file.buffer)
+            };
             res.redirect(item.url);
         } else {
             console.log(errors);
