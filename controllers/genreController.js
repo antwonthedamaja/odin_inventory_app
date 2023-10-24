@@ -48,7 +48,7 @@ exports.genre_create_post = [
             })
             await genre.save();
             if (req.file?.buffer) {
-                fileController.persistFile(req.body.name, req.file.buffer)
+                await fileController.persistFile(req.body.name, req.file.buffer)
             };
             res.redirect(genre.url);
         }
@@ -57,7 +57,7 @@ exports.genre_create_post = [
 
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
     const genre = await Genre.findByIdAndDelete(req.body.id).exec();
-    fileController.deleteFile(genre.name);
+    await fileController.deleteFile(genre.name);
     res.redirect("/genres");
 })
 
@@ -73,7 +73,7 @@ exports.genre_update_post = [
                 description: req.body.description
             }).exec();
             if (req.file?.buffer) {
-                fileController.persistFile(req.body.name, req.file.buffer)
+                await fileController.persistFile(req.body.name, req.file.buffer)
             };
             res.redirect(genre.url);
         }

@@ -1,6 +1,6 @@
 const path = require('path');
 const multer = require('multer');
-const fs = require('fs');
+const fs = require('fs/promises');
 
 const storage = multer.memoryStorage();
 
@@ -12,11 +12,11 @@ const fileFilter = (req, file, cb) => {
 
 exports.multer = multer({ storage: storage, fileFilter: fileFilter });
 
-exports.persistFile = (name, imageBuffer) => {
+exports.persistFile = async (name, imageBuffer) => {
   const filePath = path.join(__dirname, '..', 'public', 'images', `${name}.jpg`);
-  fs.writeFileSync(filePath, imageBuffer);
+  return await fs.writeFile(filePath, imageBuffer);
 }
 
-exports.deleteFile = (name) => {
-  fs.unlinkSync(path.join(__dirname, '..', 'public', 'images', `${name}.jpg` ));
+exports.deleteFile = async (name) => {
+  return await fs.unlink(path.join(__dirname, '..', 'public', 'images', `${name}.jpg` ));
 }

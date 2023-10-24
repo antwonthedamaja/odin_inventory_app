@@ -72,7 +72,7 @@ exports.item_create_post = [
             })
             await item.save();
             if (req.file?.buffer) {
-                fileController.persistFile(req.body.name, req.file.buffer)
+                await fileController.persistFile(req.body.name, req.file.buffer)
             };
             res.redirect(item.url);
         } else {
@@ -84,7 +84,7 @@ exports.item_create_post = [
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
     const item = await Item.findByIdAndDelete(req.body.id).exec();
     const nameCheck = await Item.find({ name: item.name }).exec();
-    if (nameCheck.length === 0) fileController.deleteFile(item.name); 
+    if (nameCheck.length === 0) await fileController.deleteFile(item.name); 
     res.redirect("/items");
 })
 
@@ -117,7 +117,7 @@ exports.item_update_post = [
                 released: req.body.released
             }).exec();
             if (req.file?.buffer) {
-                fileController.persistFile(req.body.name, req.file.buffer)
+                await fileController.persistFile(req.body.name, req.file.buffer)
             };
             res.redirect(item.url);
         } else {
