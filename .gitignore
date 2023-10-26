@@ -1,3 +1,5 @@
 node_modules
 .env
 public/images
+Dockerfile
+fly.toml

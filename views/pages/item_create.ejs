@@ -51,7 +51,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="image">Upload cover image: <small>(1mb max, jpg/png format only, may skip if entry already exists under same name)</small></label>
-                <input class="form-control" type="file" name="image" accept=".jpg, .jpeg, .png">
+                <input class="form-control" type="file" name="image" accept=".jpg, .jpeg, .png" id="upload">
               </div>
               <button class="btn btn-primary mt-3" type="submit">Submit</button>
             </form>
@@ -74,5 +74,14 @@
         stock.value = '';
       }
     });
+
+    const upload = document.getElementById('upload');
+  
+    upload.addEventListener('change', (e) => {
+      if (e.target.files[0].size > 1000000) {
+        alert('Selected image is above 1mb. Please reduce the size or select a different image.');
+        upload.value = '';
+      }
+    })
   </script>
 </html>
